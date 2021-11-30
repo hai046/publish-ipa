@@ -98,12 +98,13 @@ Address: 192.168.10.244
 机器人的`KEY`一定要换成自己的
 
 `url`为: `/upload/{env}`
+
 `method`: `POST`
 
 例如
 
 ```shell
-curl -X POST 'https://youdomain./upload/test'  --form 'key="8a2c4882-0121-4d2a-a80e-358e9d3f8ec0"' --form file=@"/Users/denghaizhu/Downloads/apk/20210203_1044_ios.ipa" '
+curl -X POST 'https://youdomain./upload/test'  --form 'key="you wechat reboot key"' --form file=@"/Users/denghaizhu/Downloads/apk/20210203_1044_ios.ipa" '
 ```
 
 上传后访问本ipa网站地址： `/app/{identifier}`
