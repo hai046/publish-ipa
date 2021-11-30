@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>App安装</title>
+    <style type="text/css">
+        body {
+            font-family: Helvetica, arial, sans-serif;
+        }
+
+        .versionTitle {
+            font-size: 16pt;
+            padding: 6px;
+            text-align: center;
+        }
+
+        .appInfo {
+            background: white;
+            border: 1px #ccc solid;
+            border-radius: 14px;
+            padding: 4px 10px;
+            margin: 10px 0;
+        }
+
+        .instructions {
+            font-size: 10pt;
+            color: black;
+        }
+
+        .instructions_center {
+            font-size: 10pt;
+            color: black;
+            text-align: center;
+        }
+
+        .environment {
+            font-size: 12pt;
+            color: red;
+        }
+
+        .arrow {
+            font-size: 15pt;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        a {
+            TEXT-DECORATION: none;
+            color: black;
+        }
+    </style>
+    <script>
+        var str = "\\u6211\\u662Funicode\\u7F16\\u7801";
+        str = eval("'" + str + "'");
+
+    </script>
+</head>
+<body>
+
+<div class="versionTitle">App安装</div>
+<ul>
+    <li>必须使用公司内网wifi</li>
+    <li>iOS安装请使用系统safari打开</li>
+    <li>iOS设备uuid需添加到app开发者账户</li>
+    <li>点击app图标确认安装，home键返回等待即可</li>
+</ul>
+
+{% for app in apps %}
+    <div class="appInfo">
+        <a href="itms-services://?action=download-manifest&url={{ app.download_url }}">
+            <table height="120">
+                <tr>
+                    <td class="instructions_center">
+                        <img src="{{ app.display_image }}" height="56" width="56"/><br>
+                        {{ app.name }}
+                        <span class="environment">{{ app.env }}</span>
+                    </td>
+                    <td class="instructions_center">{{ app.datetime }}</td>
+                    <td class="instructions">{{ app.desc }}</td>
+                    <td width="24" class="arrow">→</td>
+                    <td width="84" class="instructions_center">
+                        <img src="/downloads/{{ app.env }}_{{ app.identifier }}_qr.png" height="84" width="84"/>
+                    </td>
+                </tr>
+            </table>
+        </a>
+    </div>
+{% endfor %}
+</body>
+</html>
