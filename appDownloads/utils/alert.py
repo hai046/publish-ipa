@@ -4,19 +4,26 @@ import requests
 
 
 class Alert:
-    def __init__(this, key):
-        this.key = key
+    def __init__(this, groupName):
+        this.groupName = groupName
 
     def send(self, title, download_url, msg):
+        # content = {
+        #     "msgtype": "markdown",
+        #     "markdown": {
+        #         "content": title +
+        #                    "\n## [下载地址 " + download_url + "]( " + download_url + ")" +
+        #                    "\n" + msg
+        #     }
+        # }
+
         content = {
-            "msgtype": "markdown",
-            "markdown": {
-                "content": title +
-                           "\n## [下载地址 " + download_url + "]( " + download_url + ")" +
-                           "\n" + msg
-            }
+            "title": (title if self.groupName == '' else self.groupName),
+            "users": ["denghaizhu", "zhouweisong", "zhangyahao"],
+            "content": '下载地址：%s\n%s' % (download_url, msg),
+            "type": "group"
         }
-        requests.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=%s' % self.key, json=content)
+        requests.post('https://alert.shouyouwan.net/feishu/send', json=content)
 
 
 if __name__ == '__main__':
