@@ -37,4 +37,4 @@ class Alert:
 
 
 # if __name__ == '__main__':
-    # a.send("title", 'download_url', 'msg')
+#     a.send("title", 'download_url', 'msg')

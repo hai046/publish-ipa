@@ -85,7 +85,8 @@ def parse_ipa(file, domain_url, order_id):
 
     # 返回所有文件夹和文件
     for path in azip.namelist():
-        if str(path).endswith(".app/Info.plist"):
+        # 纯原生是.app ；flutter 打出来是 Runner
+        if str(path).endswith(".app/Info.plist") or str(path).endswith("Runner/Info.plist"):
             print("查找到ipa信息文件，开始解析：", path)
             with azip.open(path) as f:
                 plist = plistlib.load(f)
