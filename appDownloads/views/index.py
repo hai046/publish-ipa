@@ -135,11 +135,11 @@ def parse_ipa(file, domain_url, order_id):
 def upload(request, env):
     if request.method != "POST":
         return result_json_err("只支持post方法")
-    if 'groupName' in request.POST:
-        groupName = request.POST['groupName']
+    if 'group' in request.POST:
+        group = request.POST['group']
     else:
         return result_json_err("param key is miss ")
-    alert = Alert(groupName)
+    alert = Alert(group)
 
     file_obj = request.FILES.get('file')
     if file_obj:

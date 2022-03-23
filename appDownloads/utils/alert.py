@@ -4,21 +4,37 @@ import requests
 
 
 class Alert:
-    def __init__(this, key):
-        this.key = key
+    def __init__(self, group):
+        self.group = group
 
     def send(self, title, download_url, msg):
-        content = {
-            "msgtype": "markdown",
-            "markdown": {
-                "content": title +
-                           "\n## [下载地址 " + download_url + "]( " + download_url + ")" +
-                           "\n" + msg
+        msg = {
+            "msg_type": "post",
+            "content": {
+                "post": {
+                    "zh_cn": {
+                        "title": f"{title}",
+                        "content": [
+                            [
+                                {
+                                    "tag": "text",
+                                    "text": f"下载地址: {download_url}"
+                                }
+                            ],
+                            [
+                                {
+                                    "tag": "text",
+                                    "text": msg
+                                }
+                            ]
+                        ]
+                    }
+                }
             }
         }
-        requests.post('https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=%s' % self.key, json=content)
+
+        requests.post(f'https://open.feishu.cn/open-apis/bot/v2/hook/{self.group}', json=msg)
 
 
-if __name__ == '__main__':
-    a = Alert(key="")
-    # a.send("http://192.168.62.75:8000/app/", '描述')
+# if __name__ == '__main__':
+    # a.send("title", 'download_url', 'msg')
