@@ -122,4 +122,4 @@ STATIC_URL = '/downloads/'
 STATICFILES_DIRS = [BASE_DIR / 'downloads']
 
 # 这个ios下载需要的域名
-IOS_PLIST_DOMAIN = 'https://ios.shouyouwan.net'
+IOS_PLIST_DOMAIN = 'https://install_microcosm.wxianlai.com'
