@@ -140,7 +140,7 @@ def upload(request, env):
     else:
         return result_json_err("param key is miss ")
     if 'msg' in request.POST:
-        msg = request.POST['msg']
+        msg = f"\n{request.POST['msg']}"
     else:
         msg = ""
     alert = Alert(key)
