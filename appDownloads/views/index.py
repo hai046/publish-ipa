@@ -49,7 +49,7 @@ def index(request):
 
 
 def app(request, env, identifier):
-    context = {'apps': [AppInfo.objects.get(identifier=identifier, env=env)]}
+    context = {'apps': AppInfo.objects.filter(identifier=identifier, env=env)}
     return render(request, 'index.html', context)
 
 
@@ -137,9 +137,12 @@ def upload(request, env):
         return result_json_err("只支持post方法")
     if 'key' in request.POST:
         key = request.POST['key']
-
     else:
         return result_json_err("param key is miss ")
+    if 'msg' in request.POST:
+        msg = request.POST['msg']
+    else:
+        msg = ""
     alert = Alert(key)
     file_obj = request.FILES.get('file')
     if file_obj:
@@ -179,8 +182,8 @@ def upload(request, env):
                 img.save(f)
             # TODO 上传plist到https 路径下
             alert.send("有新鲜的iOS包出炉，请查收\n", url,
-                       "名字：%s\n环境：%s\n%s\n时间：%s\n" % (
-                           app.name, app.env, app.desc, app.datetime.strftime("%Y-%m-%d %H:%M")))
+                       "名字：%s\n环境：%s\n%s%s\n时间：%s\n" % (
+                           app.name, app.env, app.desc, app.datetime.strftime("%Y-%m-%d %H:%M"), msg))
 
         # elif str(file_obj.name).endswith(".apk"):
         #     print()
