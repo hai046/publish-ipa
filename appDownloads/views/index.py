@@ -182,8 +182,8 @@ def upload(request, env):
                 img.save(f)
             # TODO 上传plist到https 路径下
             alert.send("有新鲜的iOS包出炉，请查收\n", url,
-                       "名字：%s\n环境：%s\n%s%s\n时间：%s\n" % (
-                           app.name, app.env, app.desc, app.datetime.strftime("%Y-%m-%d %H:%M"), msg))
+                       "名字：%s\n环境：%s\n包名：%s\n%s%s\n时间：%s\n" % (
+                           app.name, app.env, app.identifier, msg, app.desc, app.datetime.strftime("%Y-%m-%d %H:%M")))
 
         # elif str(file_obj.name).endswith(".apk"):
         #     print()
